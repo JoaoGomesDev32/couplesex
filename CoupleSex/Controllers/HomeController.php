@@ -10,7 +10,7 @@
                 \CoupleSex\Views\MainView::render('home');
             } else {
                 // Renderiza para criar conta ou logar
-                \CoupleSex\Views\MainView::render('registrar');
+                \CoupleSex\Views\MainView::render('login');
             }
 
         }
