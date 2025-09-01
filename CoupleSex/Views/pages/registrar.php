@@ -20,12 +20,16 @@
         </div><!--logo-chamada-login-->
 
         <div class="form-login">
+            <h3 style="text-align:center;">Crie sua Conta!</h3>
             <form method="post">
-                <input type="text" name="login" placeholder="Seu usuário ou email...">
+                <input type="text" name="nome" placeholder="Seu nome...">
+                <input type="text" name="usuario" placeholder="Seu usuário...">
+                <input type="email" name="email" placeholder="Seu email...">
                 <input type="password" name="senha" placeholder="Sua senha...">
-                <input type="submit" name="acao" value="Logar">
+                <input type="password" name="confirmar_senha" placeholder="Confirme sua senha...">
+                <input type="submit" name="acao" value="Criar Conta">
             </form>
-            <p><a href="<?php echo INCLUDE_PATH ?>registrar">Criar Conta</a></p>
+            <p><a href="<?php echo INCLUDE_PATH ?>login">Já possui uma conta? Clique aqui</a></p>
         </div><!--form-login-->
     </div>
 
