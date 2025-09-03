@@ -22,7 +22,7 @@
         <div class="form-login">
             <form method="post">
                 <input type="text" name="login" placeholder="Seu usuário ou email...">
-                <input type="password" name="senha" placeholder="Sua senha...">
+                <input style="width:100%;" type="password" name="senha" placeholder="Sua senha...">
                 <input type="submit" name="acao" value="Logar">
             </form>
             <p><a href="<?php echo INCLUDE_PATH ?>registrar">Criar Conta</a></p>
