@@ -21,9 +21,9 @@
 
         <div class="form-login">
             <form method="post">
-                <input type="text" name="login" placeholder="Seu usuário ou email...">
+                <input type="text" name="email" placeholder="Seu usuário ou email...">
                 <input style="width:100%;" type="password" name="senha" placeholder="Sua senha...">
-                <input type="submit" name="acao" value="Logar">
+                <input type="submit" name="login" value="Logar">
             </form>
             <p><a href="<?php echo INCLUDE_PATH ?>registrar">Criar Conta</a></p>
         </div><!--form-login-->
