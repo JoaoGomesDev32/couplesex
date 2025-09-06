@@ -4,6 +4,12 @@
     class HomeController {
 
         public function index() {
+
+            if(isset($_GET['logout'])) {
+                session_destroy();
+                \CoupleSex\Utilidades::redirect(INCLUDE_PATH);
+                die();
+            }
             
             if(isset($_SESSION['login'])) {
                 // Renderiza a home do usuário
@@ -28,6 +34,7 @@
                         if(\CoupleSex\Bcrypt::check($senha, $senhaBanco)) {
                             // Logamos com sucesso
                             $_SESSION['login'] = $dados['email']; // Usa os dados já buscados
+                            $_SESSION['nome'] = explode(' ', $dados['nome'])[0];
                             \CoupleSex\Utilidades::alerta('Logado com sucesso!');
                             \CoupleSex\Utilidades::redirect(INCLUDE_PATH);
                         } else {
