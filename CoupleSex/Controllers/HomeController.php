@@ -6,9 +6,10 @@
         public function index() {
 
             if(isset($_GET['logout'])) {
+                session_unset();
                 session_destroy();
+
                 \CoupleSex\Utilidades::redirect(INCLUDE_PATH);
-                die();
             }
             
             if(isset($_SESSION['login'])) {
