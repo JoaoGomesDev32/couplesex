@@ -96,6 +96,16 @@
 							$comunidade = \CoupleSex\Models\UsuariosModel::listarComunidade();
 							foreach($comunidade as $key => $value) {
 
+								$pdo = \CoupleSex\MySql::connect();
+								$verificarAmizade = $pdo->prepare('SELECT * FROM amizades WHERE (enviou = ? AND recebeu = ? AND status = 1) OR (enviou = ? AND recebeu = ? AND status = 1)');
+
+								$verificarAmizade->execute(array($value['id'], $_SESSION['id'], $_SESSION['id'], $value['id']));
+
+								if($verificarAmizade->rowCount() == 1) {
+									//Já são amigos
+									continue;
+								}
+
 								if($value['id'] == $_SESSION['id']) {
 									continue;
 								}

@@ -14,6 +14,26 @@
             
             if(isset($_SESSION['login'])) {
                 // Renderiza a home do usuário
+
+                //Existe pedido de amizade?
+
+                if(isset($_GET['recusarAmizade'])) {
+                    $idEnviou = (int)$_GET['recusarAmizade'];
+                    \CoupleSex\Models\UsuariosModel::atualizarPedidoAmizade($idEnviou,0);
+                    \CoupleSex\Utilidades::alerta('Amizade recusada!');
+                    \CoupleSex\Utilidades::redirect(INCLUDE_PATH);
+                } else if(isset($_GET['aceitarAmizade'])) {
+                    $idEnviou = (int)$_GET['aceitarAmizade'];
+                    if(\CoupleSex\Models\UsuariosModel::atualizarPedidoAmizade($idEnviou,1)) {
+                        \CoupleSex\Utilidades::alerta('Amizade aceita!');
+                        \CoupleSex\Utilidades::redirect(INCLUDE_PATH);    
+                    } else {
+                        \CoupleSex\Utilidades::alerta('Erro ao aceitar amizade!');
+                        \CoupleSex\Utilidades::redirect(INCLUDE_PATH);    
+                    }
+                }
+
+
                 \CoupleSex\Views\MainView::render('home');
             } else {
                 // Renderiza para logar

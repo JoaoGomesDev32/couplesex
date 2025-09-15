@@ -44,6 +44,26 @@ class UsuariosModel {
         return false;
     }
 
+    public static function listarAmizadesPendentes() {
+        $pdo = \CoupleSex\MySql::connect();
+
+        $listarAmizadesPendentes = $pdo->prepare("SELECT * FROM amizades WHERE recebeu = ? AND status = 0");
+
+        $listarAmizadesPendentes->execute(array($_SESSION['id']));
+
+        return $listarAmizadesPendentes->fetchAll();
+    }
+
+    public static function getUsuarioById($id) {
+        $pdo = \CoupleSex\MySql::connect();
+
+        $usuario = $pdo->prepare("SELECT * FROM usuarios WHERE id = ? ");
+
+        $usuario->execute(array($id));
+
+        return $usuario->fetch();
+    }
+
     public static function existePedidoAmizade($idPara) {
         $pdo = \CoupleSex\MySql::connect();
 
@@ -54,6 +74,30 @@ class UsuariosModel {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public static function atualizarPedidoAmizade($enviou,$status) {
+
+        $pdo = \CoupleSex\MySql::connect();
+
+        if($status == 0) {
+            //recusei o pedido
+            $del = $pdo->prepare("DELETE FROM amizades WHERE enviou = ? AND recebeu = ? AND status = 0");
+
+            $del->execute(array($enviou,$_SESSION['id']));
+
+        } else if($status == 1) {
+            //aceitei o pedido
+            $aceitarPedido = $pdo->prepare("UPDATE amizades SET status = 1 WHERE enviou = ? AND recebeu = ?");
+
+            $aceitarPedido->execute(array($enviou,$_SESSION['id']));
+
+            if($aceitarPedido->rowCount() == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
