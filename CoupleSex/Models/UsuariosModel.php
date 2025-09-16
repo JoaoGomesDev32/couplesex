@@ -101,6 +101,24 @@ class UsuariosModel {
         }
     }
 
+    public static function listarAmigos() {
+        $pdo = \CoupleSex\MySql::connect();
+    
+    // Get friends list with user details using JOIN
+    $amigos = $pdo->prepare("
+        SELECT u.* FROM amizades a 
+        INNER JOIN usuarios u ON (a.enviou = u.id OR a.recebeu = u.id)
+        WHERE (a.enviou = ? OR a.recebeu = ?) 
+        AND a.status = 1 
+        AND u.id != ?
+    ");
+    
+    $amigos->execute(array($_SESSION['id'], $_SESSION['id'], $_SESSION['id']));
+    
+    return $amigos->fetchAll();
+
+    }
+
 }
 
 ?>
