@@ -33,6 +33,18 @@
                     }
                 }
 
+                //Existe postagem no feed?
+                if(isset($_POST['post_feed'])) {
+                    if(!empty($_POST['post_content'])) {
+                        \CoupleSex\Models\HomeModel::postFeed($_POST['post_content']);
+                        \CoupleSex\Utilidades::alerta('Post realizado com sucesso!');
+                        \CoupleSex\Utilidades::redirect(INCLUDE_PATH);
+                    } else {
+                        \CoupleSex\Utilidades::alerta('Post não pode ser vazio!');
+                        \CoupleSex\Utilidades::redirect(INCLUDE_PATH);
+                    }
+                }
+
 
                 \CoupleSex\Views\MainView::render('home');
             } else {
